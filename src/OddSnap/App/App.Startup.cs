@@ -25,7 +25,7 @@ public partial class App
         bool isPostInstall = e.Args.Any(a => a.Equals("--post-install", StringComparison.OrdinalIgnoreCase));
         bool openSettingsOnStartup = e.Args.Any(a => a.Equals("--settings", StringComparison.OrdinalIgnoreCase) || a.Equals("/settings", StringComparison.OrdinalIgnoreCase));
 
-        _mutex = new Mutex(false, "OddSnapScreenshotTool_SingleInstance");
+        _mutex = new Mutex(false, InstanceIdentity.MutexName);
         bool acquired;
         try
         {

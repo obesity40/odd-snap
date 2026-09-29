@@ -2,6 +2,7 @@ using System.IO;
 using System.IO.Pipes;
 using System.Security.Principal;
 using System.Text;
+using OddSnap;
 
 namespace OddSnap.Services;
 
@@ -23,7 +24,7 @@ public static class SingleInstanceActivationService
         {
             var sid = WindowsIdentity.GetCurrent().User?.Value ?? Environment.UserName;
             var safeSid = new string(sid.Select(c => char.IsLetterOrDigit(c) || c == '-' ? c : '_').ToArray());
-            return $"OddSnapScreenshotTool_Activation_{safeSid}";
+            return InstanceIdentity.ActivationPipePrefix + safeSid;
         }
     }
 
