@@ -138,6 +138,7 @@ public partial class SettingsWindow : Window
         Loaded += (_, _) => ApplyMicaBackdrop();
         Loaded += async (_, _) => await RefreshUpdateStatusAsync(false);
         ContentRendered += (_, _) => TryProcessPendingTrayHistoryOpen();
+
         _historyService.Changed += HistoryService_Changed;
         _imageSearchIndexService.Changed += ImageSearchIndexService_Changed;
         _imageSearchIndexService.StatusChanged += ImageSearchIndexService_StatusChanged;
