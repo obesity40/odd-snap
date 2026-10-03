@@ -15,6 +15,9 @@ public static class OddSnapWindowChrome
         {
             CaptionHeight = 0,
             CornerRadius = new CornerRadius(cornerRadius),
+            // A layered (transparent) window must not draw a glass frame, and
+            // neither should an opaque one: DWM supplies the frame and shadow,
+            // so a second edge from WindowChrome would double up.
             GlassFrameThickness = new Thickness(0),
             ResizeBorderThickness = new Thickness(8),
             UseAeroCaptionButtons = false

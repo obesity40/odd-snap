@@ -54,7 +54,7 @@ Single source of truth for color/typography/motion:
 | WPF palette | `Presentation/Theme.cs` | Semantic tokens only (`BgCard`, `TextSecondary`, …). Never hardcode hex in XAML or code-behind; use `DynamicResource` keys published by `Theme.ApplyTo`. |
 | WinForms/GDI palette | `Helpers/UiChrome.cs` | Must mirror `Theme` values; when adding a token add it to both (or derive it — see Stage 1). |
 | Motion | `UI/Motion.cs` | All durations/easings; respects the reduced-motion setting via `Motion.Disabled`. |
-| Window chrome | `UI/OddSnapWindowChrome.cs` | Rounded corners + DWM dark mode + pre-Win11 fallback. Every top-level window goes through it. |
+| Window chrome | `UI/OddSnapWindowChrome.cs` | Rounded corners + DWM dark mode + pre-Win11 fallback. Every top-level window goes through it. Prefer `AllowsTransparency="False"`: layered windows lose hardware acceleration and stutter when scrolling. An opaque window still gets its frame and shadow from DWM, so no self-drawn hairline is needed. |
 | Spacing/control metrics | `SettingsControlHeight/Padding/FontSize/MinWidth` resources | Reuse; do not invent per-view sizes. |
 
 Hard rules for new/modified UI:
