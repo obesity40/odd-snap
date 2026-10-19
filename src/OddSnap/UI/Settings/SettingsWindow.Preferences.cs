@@ -865,7 +865,7 @@ public partial class SettingsWindow
         finally
         {
             ImageIndexResetInProgress = false;
-            ResetImageIndexesBtn.Content = "Reset cache";
+            ResetImageIndexesBtn.Content = LocalizationService.Translate("Reset cache");
             ResetImageIndexesBtn.IsEnabled = true;
         }
     }
