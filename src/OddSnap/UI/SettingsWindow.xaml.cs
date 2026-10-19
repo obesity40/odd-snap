@@ -315,7 +315,7 @@ public partial class SettingsWindow : Window
 
     private void SetStickerRuntimeStatusRefreshFailed(string message)
     {
-        StickerLocalEngineStatusText.Text = "Runtime status refresh failed";
+        StickerLocalEngineStatusText.Text = LocalizationService.Translate("Runtime status refresh failed");
         StickerLocalEngineProgress.Visibility = Visibility.Collapsed;
         StickerLocalEngineProgress.IsIndeterminate = false;
         StickerLocalEngineProgress.Value = 0;
@@ -327,7 +327,7 @@ public partial class SettingsWindow : Window
 
     private void SetUpscaleRuntimeStatusRefreshFailed(string message)
     {
-        UpscaleLocalEngineStatusText.Text = "Runtime status refresh failed";
+        UpscaleLocalEngineStatusText.Text = LocalizationService.Translate("Runtime status refresh failed");
         UpscaleLocalEngineProgress.Visibility = Visibility.Collapsed;
         UpscaleLocalEngineProgress.IsIndeterminate = false;
         UpscaleLocalEngineProgress.Value = 0;
@@ -455,7 +455,7 @@ public partial class SettingsWindow : Window
             {
                 AppDiagnostics.LogError("settings.image-search-index-changed", ex);
                 SetImageSearchLoading(false, forceIndexed: true);
-                HistorySearchStatusText.Text = "Search failed";
+                HistorySearchStatusText.Text = LocalizationService.Translate("Search failed");
             }
         }, DispatcherPriority.Background, "settings.image-search-index-post");
     }
@@ -483,7 +483,7 @@ public partial class SettingsWindow : Window
             {
                 AppDiagnostics.LogError("settings.image-search-status", ex);
                 SetImageSearchLoading(false, forceIndexed: true);
-                HistorySearchStatusText.Text = "Search failed";
+                HistorySearchStatusText.Text = LocalizationService.Translate("Search failed");
             }
         }, DispatcherPriority.Background, "settings.image-search-status-post");
     }
