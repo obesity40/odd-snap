@@ -160,8 +160,7 @@ public partial class SettingsWindow
                 "Reset Settings",
                 "Reset all settings to defaults?\n\nThis cannot be undone.",
                 "Reset",
-                "Cancel"))
-        {
+                "Cancel"))        {
             SetSettingsImportExportStatus("Reset canceled. Existing settings kept.");
             return;
         }
@@ -580,10 +579,10 @@ public partial class SettingsWindow
             }
 
             applyRuntime?.Invoke(previous);
-            SetToastPreferenceStatus($"{label} change was not saved. Previous setting restored.");
+            SetToastPreferenceStatus(FormatSettingReverted(label));
             ToastWindow.ShowError(
-                $"{label} failed",
-                $"The previous toast setting was restored. Check Settings -> Toasts and try again.\n{ex.Message}");
+                string.Format(LocalizationService.Translate("{0} failed"), LocalizationService.Translate(label)),
+                LocalizationService.Translate("The previous toast setting was restored. Check Settings -> Toasts and try again.") + "\n" + ex.Message);
         }
     }
 
@@ -652,10 +651,10 @@ public partial class SettingsWindow
             }
 
             applyRuntime?.Invoke(previous);
-            SetGeneralPreferenceStatus($"{label} change was not saved. Previous setting restored.");
+            SetGeneralPreferenceStatus(FormatSettingReverted(label));
             ToastWindow.ShowError(
-                $"{label} failed",
-                $"The previous general setting was restored. Check Settings -> General and try again.\n{ex.Message}");
+                string.Format(LocalizationService.Translate("{0} failed"), LocalizationService.Translate(label)),
+                LocalizationService.Translate("The previous general setting was restored. Check Settings -> General and try again.") + "\n" + ex.Message);
         }
     }
 
@@ -666,6 +665,16 @@ public partial class SettingsWindow
             ? Visibility.Collapsed
             : Visibility.Visible;
     }
+
+    /// <summary>
+    /// Composes the "change was not saved" message for a named setting. The
+    /// label and the sentence are both translated, so the result is never a mix
+    /// of languages (an interpolated string would not match any key).
+    /// </summary>
+    private static string FormatSettingReverted(string label) =>
+        string.Format(
+            LocalizationService.Translate("{0} change was not saved. Previous setting restored."),
+            LocalizationService.Translate(label));
 
     private void TrayLeftClickActionCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
@@ -819,7 +828,7 @@ public partial class SettingsWindow
 
         ImageIndexResetInProgress = true;
         ResetImageIndexesBtn.IsEnabled = false;
-        ResetImageIndexesBtn.Content = "Resetting...";
+        ResetImageIndexesBtn.Content = LocalizationService.Translate("Resetting...");
 
         try
         {
